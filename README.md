@@ -13,11 +13,6 @@
 ![imag](./public/assets/image/notes.png)
 
 
-## Table of Contents
-* [Installation](#installation)
-* [Usage](#usage)
-* [Contributing](#contributing)
-* [Tests](#tests-information)
 
 
 ## How to use
