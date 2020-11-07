@@ -1,14 +1,20 @@
-var dbData = require("../db/db.json");
+
+//route for api
+
+const dbData = require("../db/db.json");
 const fs = require("fs");
 const path = require("path");
 let jsonFilePath = path.join(__dirname, "../db/db.json");
 
 
 module.exports = function (app) {
+
+    //get request
     app.get("/api/notes", function (req, res) {
         return res.json(dbData);
     });
 
+    //post request
     app.post("/api/notes", function (req, res) {
 
         var newNote = req.body;
@@ -21,6 +27,7 @@ module.exports = function (app) {
         newNote.id = id + 1;
         dbData.push(newNote);
 
+        //write updated json file
         fs.writeFile(jsonFilePath, JSON.stringify(dbData), function (err) {
 
             if (err) {
@@ -32,6 +39,7 @@ module.exports = function (app) {
         res.json(newNote);
     });
 
+    //delete request
     app.delete("/api/notes/:id", function (req, res) {
         let deleteId = parseInt(req.params.id);
         // console.log(deleted);
@@ -42,6 +50,8 @@ module.exports = function (app) {
                 dbData.splice(i, 1);
             }
         }
+
+        //after delete re-write json file again
         fs.writeFileSync(jsonFilePath, JSON.stringify(dbData), function (err) {
 
             if (err) {
